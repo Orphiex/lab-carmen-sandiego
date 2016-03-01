@@ -62,3 +62,33 @@ SELECT name FROM city WHERE population = 91084;
 
 
 -- She's in Santa Monica!
+
+
+
+-- Bonus Questions
+
+-- 1. List the distinct regions in the Country table.
+
+SELECT DISTINCT region FROM country;
+
+-- 2. How many countries are located in European regions?
+
+SELECT COUNT(DISTINCT code) FROM country WHERE continent = 'Europe';
+
+-- 3. Find the total population of all countries group by regions.
+
+SELECT region, SUM(population) FROM country GROUP BY region;
+
+-- 4. Use one query to answer the following 2 questions
+   -- i.  Find the countries which have the most spoken languages used
+   -- ii. Find the maximum number of languages you can use in one country
+
+SELECT countrycode, COUNT(countrycode) FROM countrylanguage GROUP BY countrycode ORDER BY COUNT(countrycode) DESC LIMIT 10;
+
+-- 5. Find all the Asia countries that went independent from 1940 to 1950. Order the result by the year of independence.
+
+SELECT name, continent, indepyear FROM country WHERE continent = 'Asia' AND indepyear>1939 AND indepyear<1951 ORDER BY indepyear;
+
+-- 6. Find all the countries that do not use English at all
+
+SELECT DISTINCT countrycode FROM countrylanguage WHERE countrycode NOT IN (SELECT countrycode FROM countrylanguage WHERE language = 'English');
